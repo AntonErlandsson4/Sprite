@@ -9,6 +9,7 @@ namespace sprite
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Sprite player;
+        Sprite enemy;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -23,6 +24,7 @@ namespace sprite
         {
             // TODO: Add your initialization logic here
             player = new Sprite();
+            enemy = new Sprite();
             base.Initialize();
         }
 
@@ -31,6 +33,8 @@ namespace sprite
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             player.Texture = Content.Load<Texture2D>("mario");
             player.Rect = new Rectangle(100, 100, 100, 150);
+            enemy.Texture = Content.Load<Texture2D>("traktor2");
+            enemy.Rect = new Rectangle(270, 200, 170, 150);
             // TODO: use this.Content to load your game content here
         }
 
@@ -40,7 +44,7 @@ namespace sprite
                 Exit();
 
             // TODO: Add your update logic here
-
+            enemy.Rect=new Rectangle(enemy.Rect.X-1, enemy.Rect.Y, enemy.Rect.Width, enemy.Rect.Y);
             base.Update(gameTime);
         }
 
@@ -51,6 +55,7 @@ namespace sprite
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             _spriteBatch.Draw(player.Texture, player.Rect, Color.White);
+            _spriteBatch.Draw(enemy.Texture, enemy.Rect, Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
